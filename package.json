@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ambujraj/ManagedEntry#readme",
   "dependencies": {
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
     "mongoose": "^5.7.12",
     "nodemailer": "^6.3.1"
