@@ -70,7 +70,7 @@ const output = `
   });
 
   let mailOptions = {
-      from: 'jackkash12@gmail.com', 
+      from: 'jackkapoor12@gmail.com', 
       to: hostEmail, 
       subject: 'New Visitor Info', 
       text: '', 
