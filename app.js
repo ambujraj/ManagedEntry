@@ -6,7 +6,11 @@ var entrySchema = new mongoose.Schema({
 	name: String,
 	email: String,
    phoneNumber: String,
-   checkint: String
+   checkint: String,
+   hostNam: String,
+   hostAd: String,
+   hostE: String,
+   hostPh: String
 });
 var Entry = mongoose.model("Entry", entrySchema);
 app.enable('trust proxy');
@@ -22,13 +26,13 @@ app.post("/checkin", function(req, res){
 var dt = new Date();
 var nam = req.body.name;
 var ema = req.body.email;
-var num = req.body.phone; 
+var num = req.body.phone;
 var tim = dt.toTimeString();
 var hostName = "Ambuj Raj";
 var hostEmail = "ambujm143@gmail.com";
 var hostPhone = "7541989846";
 var hostAdd = "BH-6, LPU, Jalandhar";
-Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim});
+Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim,hostNam: hostName, hostAd: hostAdd, hostE: hostEmail, hostPh: hostPhone});
 res.render("checkin", {uname: nam});
 });
 
