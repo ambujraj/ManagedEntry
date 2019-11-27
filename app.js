@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/managedEntry", {useNewUrlParser: true},{useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost:27017/managedEntry", {useNewUrlParser: true,useUnifiedTopology: true});
 var entrySchema = new mongoose.Schema({
 	name: String,
 	email: String,
-   number: String,
-   checkint: String,
-   checkind: String,
+   phoneNumber: String,
+   checkint: String
 });
 var Entry = mongoose.model("Entry", entrySchema);
+app.enable('trust proxy');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -23,9 +23,9 @@ var dt = new Date();
 var nam = req.query.name;
 var ema = req.query.email;
 var num = req.query.phone; 
-var time = dt.toTimeString();
-var date = dt.toDateString();
-Entry.create({name: nam, email: ema, number: num, checkint: time, checkind: date});
+var tim = dt.toTimeString();
+Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim});
+res.render("checkin", {uname: nam});
 });
 
 app.get("*", function(req, res){

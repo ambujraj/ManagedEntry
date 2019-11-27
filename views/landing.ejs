@@ -106,29 +106,26 @@ form input[type="submit"]:hover {
 
 <form action="/checkin" method="GET">
   <label>
-    <input id="fname" name="name" type="text" placeholder="Name">
+    <input id="fname" name="name" type="text" placeholder="Name" required>
     <span>Name</span>
   </label>
   
   <label>
-    <input type="email" name="email" placeholder="Email">
+    <input type="email" name="email" placeholder="Email" required>
     <span>Email</span>
   </label>
   
   <label>
-    <input type="tel" name="phone" pattern="[1-9]{1}[0-9]{9}" placeholder="Phone Number">
+    <input type="tel" name="phone" pattern="[1-9]{1}[0-9]{9}" placeholder="Phone Number" required>
     <span>Phone Number</span>
   </label>
  
-  <input type="submit" onclick="time();" value="Check in">
+  <input type="submit" value="Check in">
 </form>
-<!-- partial -->
+
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script>
-      function time(){
-          var date = new Date();
-          console.log(date.toDateString());
-      }
+      
   $(function() {
     $('input').on('change', function() {
       var input = $(this);
