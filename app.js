@@ -1,5 +1,13 @@
 const express = require('express');
 const app = express();
+const dotenv = require('dotenv/config');
+const Nexmo = require('nexmo');
+const nexmo = new Nexmo({
+   apiKey: process.env.APIKEY,
+   apiSecret: process.env.APISECRET,
+ });
+const nodemailer = require('nodemailer');
+const from = 'ManagedEntry';
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/managedEntry", {useNewUrlParser: true,useUnifiedTopology: true});
 var entrySchema = new mongoose.Schema({
@@ -21,25 +29,113 @@ app.use(express.static("public"));
 app.get("/", function(req, res){
    res.render("landing");
 });
-
+var nam,dt,ema,num,tim,hostName,hostEmail,hostPhone,hostAdd;
 app.post("/checkin", function(req, res){
-var dt = new Date();
-var nam = req.body.name;
-var ema = req.body.email;
-var num = req.body.phone;
-var tim = dt.toTimeString();
-var hostName = "Ambuj Raj";
-var hostEmail = "ambujm143@gmail.com";
-var hostPhone = "7541989846";
-var hostAdd = "BH-6, LPU, Jalandhar";
+dt = new Date();
+nam = req.body.name;
+ema = req.body.email;
+num = req.body.phone;
+tim = dt.toTimeString();
+hostName = "Ambuj Raj";
+hostEmail = "ambujm143@gmail.com";
+hostPhone = process.env.MYNUMBER;
+const to = '91'+hostPhone;
+hostAdd = "BH-6, LPU, Jalandhar";
 Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim,hostNam: hostName, hostAd: hostAdd, hostE: hostEmail, hostPh: hostPhone});
+var tex = 'Name: '+nam+'\nEmail: '+ema+'\nPhone Number: '+num+'\nCheckin Time: '+tim;
+const text = tex;
+nexmo.message.sendSms(from, to, text);
+
+const output = `
+    <h3>New visitor Detail:</h3>
+    <ul>  
+      <li>Name: ${nam}</li>
+      <li>Email: ${ema}</li>
+      <li>Phone: ${num}</li>
+      <li>Check-in time: ${tim}</li>
+    </ul>
+  `;
+
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, 
+    auth: {
+        user: 'jackkapoor12@gmail.com', 
+        pass: process.env.EPASS
+    },
+    tls:{
+      rejectUnauthorized:false
+    }
+  });
+
+  let mailOptions = {
+      from: 'jackkash12@gmail.com', 
+      to: hostEmail, 
+      subject: 'New Visitor Info', 
+      text: '', 
+      html: output 
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);   
+  });
+
 res.render("checkin", {uname: nam});
 });
+app.post("/checkout",function(req, res){
+   var tt = new Date().toTimeString();
+   const output = `
+    <h3>Visitors Details</h3>
+    <ul>  
+      <li>Name: ${nam}</li>
+      <li>Email: ${ema}</li>
+      <li>Phone: ${num}</li>
+      <li>Check-in time: ${tim}</li>
+      <li>Check-out time: ${tt}</li>
+      <li>Host Name: ${hostName}</li>
+      <li>Address Visited: ${hostAdd}</li>
+    </ul>
+    <h3>Message</h3>
+    <p>Thank you for Visiting. Do visit us again.</p>
+  `;
 
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, 
+    auth: {
+        user: 'jackkapoor12@gmail.com', 
+        pass: process.env.EPASS
+    },
+    tls:{
+      rejectUnauthorized:false
+    }
+  });
+
+  let mailOptions = {
+      from: 'jackkash12@gmail.com', 
+      to: ema, 
+      subject: 'Visitor Info', 
+      text: '', 
+      html: output 
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          return console.log(error);
+      }
+      console.log('Message sent: %s', info.messageId);   
+  });
+   
+   res.render("checkout");
+});
 app.get("*", function(req, res){
     res.redirect("/");
 });
 app.listen(process.env.PORT || 3000, function(){
    console.log("Server Started");
 });
-
