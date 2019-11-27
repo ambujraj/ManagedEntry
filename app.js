@@ -18,11 +18,11 @@ app.get("/", function(req, res){
    res.render("landing");
 });
 
-app.get("/checkin", function(req, res){
+app.post("/checkin", function(req, res){
 var dt = new Date();
-var nam = req.query.name;
-var ema = req.query.email;
-var num = req.query.phone; 
+var nam = req.body.name;
+var ema = req.body.email;
+var num = req.body.phone; 
 var tim = dt.toTimeString();
 Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim});
 res.render("checkin", {uname: nam});
