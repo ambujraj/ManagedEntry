@@ -2,14 +2,15 @@ const express = require('express');
 const app = express();
 const dotenv = require('dotenv/config');
 const Nexmo = require('nexmo');
-const nexmo = new Nexmo({
+const nexmo = new Nexmo({  //https://www.nexmo.com and the messaging service works from 9am to 9pm
    apiKey: process.env.APIKEY,
    apiSecret: process.env.APISECRET,
  });
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer'); //nodemailer to send email
 const from = 'ManagedEntry';
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/managedEntry", {useNewUrlParser: true,useUnifiedTopology: true});
+// Creating Database Schema
 var entrySchema = new mongoose.Schema({
 	name: String,
 	email: String,
@@ -26,10 +27,12 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+// Home 
 app.get("/", function(req, res){
    res.render("landing");
 });
 var nam,dt,ema,num,tim,hostName,hostEmail,hostPhone,hostAdd;
+// CheckIn 
 app.post("/checkin", function(req, res){
 dt = new Date();
 nam = req.body.name;
@@ -86,6 +89,8 @@ const output = `
 
 res.render("checkin", {uname: nam});
 });
+
+// Checkout
 app.post("/checkout",function(req, res){
    var tt = new Date().toTimeString();
    const output = `
@@ -117,7 +122,7 @@ app.post("/checkout",function(req, res){
   });
 
   let mailOptions = {
-      from: 'jackkash12@gmail.com', 
+      from: 'jackkapoor12@gmail.com', 
       to: ema, 
       subject: 'Visitor Info', 
       text: '', 
@@ -133,9 +138,12 @@ app.post("/checkout",function(req, res){
    
    res.render("checkout");
 });
+// Default
 app.get("*", function(req, res){
     res.redirect("/");
 });
+
+// Listening
 app.listen(process.env.PORT || 3000, function(){
    console.log("Server Started");
 });
