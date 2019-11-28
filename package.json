@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -12,9 +12,6 @@
   },
   "author": "Ambuj",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ambujraj/ManagedEntry/issues"
-  },
   "bugs": {
     "url": "https://github.com/ambujraj/ManagedEntry/issues"
   },
