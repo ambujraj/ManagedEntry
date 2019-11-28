@@ -9,18 +9,49 @@
   <a href="https://github.com/ambujraj/ManagedEntry/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/ambujraj/ManagedEntry/blob/master/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/github/license/ambujraj/Managed Entry" />
-  </a>
+  
 </p>
 
-> An Entry Management System
+> A Web Based Entry Management System. Starting with a form asking the visitors to enter the Name, Email Address and Phone Number of Visitors.
+> On pressing CheckIn, a page will open with a button to checkout, and at the same time data will be stores in Database(MongoDB) with the timestamp and the email will be sent with the following information.
+* Name
+* Email
+* Phone
+* CheckIn Time
+
+> On next page is the checkout Button, which on clicked will mark the time and will send the email to the visitor with the following details.
+* Name
+* Email
+* Phone
+* CheckIn Time
+* CheckOut Time
+* Host Name
+* Address Visited
 
 ![Screenshot from 2019-11-28 05-22-02](https://user-images.githubusercontent.com/29935993/69766699-30895400-119f-11ea-8868-d60acb4d2061.png)
+
+![Screenshot from 2019-11-28 16-48-56](https://user-images.githubusercontent.com/29935993/69802280-3adb3a80-11ff-11ea-82e3-e88c7f4b3ca6.png)
+
+![Screenshot from 2019-11-28 16-52-02](https://user-images.githubusercontent.com/29935993/69802378-74ac4100-11ff-11ea-99fe-6d87d0309bf9.png)
+
+![Screenshot from 2019-11-28 16-56-11](https://user-images.githubusercontent.com/29935993/69802679-1338a200-1200-11ea-826e-9b63f6916a6c.png)
+
+![Screenshot from 2019-11-28 16-56-30](https://user-images.githubusercontent.com/29935993/69802681-1469cf00-1200-11ea-8288-58445e2c84d5.png)
+
 
 ### 🏠 [Homepage](http://github.com/ambujraj/ManagedEntry)
 
 ## Prerequisites
+
+- npm >=5.5.0
+- node >=9.3.0
+
+## Tech Stack Used 
+ - Nodejs
+ - MongoDB
+ - Github
+ - Nodemailer
+ - Express
 
 - npm >=5.5.0
 - node >=9.3.0
