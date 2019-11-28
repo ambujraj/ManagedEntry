@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const dotenv = require('dotenv/config');
+const socketio = require('socket.io');
 const Nexmo = require('nexmo');
 const nexmo = new Nexmo({  //https://www.nexmo.com and the messaging service works from 9am to 9pm
    apiKey: process.env.APIKEY,
    apiSecret: process.env.APISECRET,
- });
+ },{debug: true});
 const nodemailer = require('nodemailer'); //nodemailer to send email
 const from = 'ManagedEntry';
 const mongoose = require('mongoose');
@@ -42,12 +43,32 @@ tim = dt.toTimeString();
 hostName = "Ambuj Raj";
 hostEmail = "ambujm143@gmail.com";
 hostPhone = process.env.MYNUMBER;
-const to = '91'+hostPhone;
+const to = hostPhone;
 hostAdd = "BH-6, LPU, Jalandhar";
 Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim,hostNam: hostName, hostAd: hostAdd, hostE: hostEmail, hostPh: hostPhone});
-var tex = 'Name: '+nam+'\nEmail: '+ema+'\nPhone Number: '+num+'\nCheckin Time: '+tim;
+var tex = 'Name: ';
 const text = tex;
-nexmo.message.sendSms(from, to, text);
+nexmo.message.sendSms(
+   'Nexmo', to, text, { type: 'unicode' },
+   (err, responseData) => {
+     if(err) {
+       console.log(err);
+     } else {
+       const { messages } = responseData;
+       const { ['message-id']: id, ['to']: number, ['error-text']: error  } = messages[0];
+       console.dir(responseData);
+       // Get data from response
+       const data = {
+         id,
+         number,
+         error
+       };
+
+       // Emit to the client
+       io.emit('smsStatus', data);
+     }
+   }
+ );
 
 const output = `
     <h3>New visitor Detail:</h3>
@@ -144,6 +165,14 @@ app.get("*", function(req, res){
 });
 
 // Listening
-app.listen(process.env.PORT || 3000, function(){
+const server = app.listen(process.env.PORT || 3000, function(){
    console.log("Server Started");
+});
+
+const io = socketio(server);
+io.on('connection', (socket) => {
+  console.log('Connected');
+  io.on('disconnect', () => {
+    console.log('Disconnected');
+  })
 });

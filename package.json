@@ -23,6 +23,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.7.12",
     "nexmo": "^2.5.1",
-    "nodemailer": "^6.3.1"
+    "nodemailer": "^6.3.1",
+    "socket.io": "^2.3.0"
   }
 }
