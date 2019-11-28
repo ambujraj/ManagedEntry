@@ -1,5 +1,3 @@
-![Screenshot from 2019-11-28 05-22-02](https://user-images.githubusercontent.com/29935993/69766699-30895400-119f-11ea-8868-d60acb4d2061.png)
-
 <h1 align="center">Welcome to Managed Entry 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
@@ -8,7 +6,7 @@
   <a href="https://github.com/ambujraj/ManagedEntry/blob/master/README.md" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/ambujraj/ManagedEntry/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
   <a href="https://github.com/ambujraj/ManagedEntry/blob/master/LICENSE" target="_blank">
@@ -17,6 +15,8 @@
 </p>
 
 > An Entry Management System
+
+![Screenshot from 2019-11-28 05-22-02](https://user-images.githubusercontent.com/29935993/69766699-30895400-119f-11ea-8868-d60acb4d2061.png)
 
 ### 🏠 [Homepage](http://github.com/ambujraj/ManagedEntry)
 
