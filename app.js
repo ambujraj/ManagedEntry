@@ -46,7 +46,7 @@ hostPhone = process.env.MYNUMBER;
 const to = hostPhone;
 hostAdd = "BH-6, LPU, Jalandhar";
 Entry.create({name: nam, email: ema, phoneNumber: num, checkint: tim,hostNam: hostName, hostAd: hostAdd, hostE: hostEmail, hostPh: hostPhone});
-var tex = 'Name: ';
+var tex = 'Name: '+nam+'\nEmail: '+ema+'\nPhone Number: '+num+'\nCheckin Time: '+tim;
 const text = tex;
 nexmo.message.sendSms(
    'Nexmo', to, text, { type: 'unicode' },
